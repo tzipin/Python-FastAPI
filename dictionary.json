@@ -1,0 +1,16 @@
+{
+  "lesson1.py": [
+    {
+      "lenFunc": true,
+      "lenFile": false,
+      "MissingDocstring": false
+    }
+  ],
+  "library.py": [
+    {
+      "lenFunc": true,
+      "lenFile": false,
+      "MissingDocstring": true
+    }
+  ]
+}
