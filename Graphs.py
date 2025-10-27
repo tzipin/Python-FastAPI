@@ -1,19 +1,26 @@
 import matplotlib.pyplot as plt
+from io import BytesIO
 
 
 def histogram_len_functions(lengths):
+    filename = "length of functions.png"
     plt.hist(lengths, bins=range(0, max(lengths) + 5, 1), edgecolor='black')
     plt.xticks(range(max(lengths) + 6))
     plt.title("Distribution of function lengths")
     plt.xlabel("Lines number")
     plt.ylabel("Functions number")
     plt.grid(True)
-    plt.show()
+    plt.tight_layout()
+    plt.savefig(filename)
+    plt.close()
+    return filename
+    # plt.show()
 
 
 def plot_pie_chart(labels, sizes):
     if len(labels) != len(sizes):
         raise ValueError("The length of 'labels' and 'sizes' must be the same.")
+    filename = "number of problems for all problem type.png"
     colors = plt.cm.tab20.colors[:len(labels)]
     fig, ax = plt.subplots(figsize=(8, 8))
     wedges, texts, autotexts = ax.pie(
@@ -27,7 +34,16 @@ def plot_pie_chart(labels, sizes):
     ax.axis('equal')
     plt.title("Pie Chart", fontsize=16)
     plt.tight_layout()
-    plt.show()
+    buffer = BytesIO()
+    plt.savefig(buffer, format="png")
+    plt.close(fig)
+    buffer.seek(0)
+    return buffer
+    # plt.savefig(filename)
+    # plt.close()
+    # return filename
+    # plt.show()
+
 
 def plot_bar_chart(labels, values):
     if len(labels) != len(values):
@@ -45,7 +61,11 @@ def plot_bar_chart(labels, values):
                     textcoords="offset points",
                     ha='center', va='bottom', fontsize=12)
     plt.tight_layout()
-    plt.show()
+    buffer = BytesIO()
+    plt.savefig(buffer, format="png")
+    plt.close(fig)
+    buffer.seek(0)
+    return buffer
 
 
 # histogram_len_functions([3, 3, 3, 3, 3, 3, 3, 8, 6, 10, 15, 8, 4])
@@ -57,4 +77,4 @@ sizes = [25, 30, 20, 25]
 labels = ['A', 'B', 'C', 'D']
 values = [10, 24, 36, 18]
 
-plot_bar_chart(labels, values)
+# plot_bar_chart(labels, values)
